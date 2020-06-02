@@ -31,18 +31,16 @@ public class Order implements java.io.Serializable {
 	private Date ordered;
 	private String status;
 	private BigDecimal total;
-	private List<LineItem> linesItems = new ArrayList<LineItem>();
 
 	public Order() {
 	}
 
-	public Order(Long idorder, Account customer, Date ordered, String status, BigDecimal total, List<LineItem> linesItems) {
+	public Order(Long idorder, Account customer, Date ordered, String status, BigDecimal total) {
 		this.idorder = idorder;
 		this.customer = customer;
 		this.ordered = ordered;
 		this.status = status;
 		this.total = total;
-		this.linesItems = linesItems;
 	}
 
 	@Id
@@ -94,16 +92,6 @@ public class Order implements java.io.Serializable {
 		this.total = total;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-	@Cascade(CascadeType.SAVE_UPDATE)
-	public List<LineItem> getLinesItems() {
-		return this.linesItems;
-	}
-
-	public void setLinesItems(List<LineItem> linesItems) {
-		this.linesItems = linesItems;
-	}
-
 	public static class BuilderOrder {
 
 		private Long idorder;
@@ -111,7 +99,6 @@ public class Order implements java.io.Serializable {
 		private Date ordered;
 		private String status;
 		private BigDecimal total;
-		private List<LineItem> linesItems = new ArrayList<LineItem>();
 
 		public BuilderOrder setIdorder(Long idorder) {
 			this.idorder = idorder;
@@ -138,14 +125,10 @@ public class Order implements java.io.Serializable {
 			return this;
 		}
 
-		public BuilderOrder setLinesItems(List<LineItem> linesItems) {
-			this.linesItems = linesItems;
-			return this;
-		}
+	
 
 		public Order build() {
-			Order order = new Order(this.idorder, this.customer, this.ordered, 
-					this.status, this.total, this.linesItems);
+			Order order = new Order(this.idorder, this.customer, this.ordered, this.status, this.total);
 			return order;
 		}
 	}

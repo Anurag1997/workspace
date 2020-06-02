@@ -35,14 +35,7 @@ public class InventoryServiceImp implements InventoryService {
 			throw new InventoryNotFoundException();
 	}
 
-	@Override
-	public List<Inventory> findByCategory(String category) throws InventoryNotFoundException {
-		List<Inventory> inventory = inventoryDao.findByCategory(category);
-		if (inventory.isEmpty() || inventory == null)
-			throw new InventoryNotFoundException();
-		else
-			return inventory;
-	}
+
 
 	@Override
 	public List<Inventory> findAll() throws InventoryNotFoundException {

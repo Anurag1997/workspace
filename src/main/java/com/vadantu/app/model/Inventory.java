@@ -23,10 +23,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Inventory implements java.io.Serializable {
 
 	private Long idProduct;
-	private Category category;
 	private String description;
+	private Integer quantity;
 	private BigDecimal price;
-	private List<LineItem> linesItems = new ArrayList<LineItem>();
 
 	public Inventory() {
 	}
@@ -34,12 +33,7 @@ public class Inventory implements java.io.Serializable {
 		this.description = description;
 		this.price = price;
 	}
-	public Inventory(Category category, String description, BigDecimal price, List<LineItem> linesItems) {
-		this.category = category;
-		this.description = description;
-		this.price = price;
-		this.linesItems = linesItems;
-	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -50,17 +44,6 @@ public class Inventory implements java.io.Serializable {
 
 	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
-	}
-
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idcategory")
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	@Column(name = "description", nullable = false, length = 100)
@@ -81,13 +64,4 @@ public class Inventory implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public List<LineItem> getLinesItems() {
-		return this.linesItems;
-	}
-
-	public void setLinesItems(List<LineItem> linesItems) {
-		this.linesItems = linesItems;
-	}
 }

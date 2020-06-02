@@ -40,11 +40,4 @@ public class InventoryController {
 		Inventory inventory = inventoryService.findBy(description);
 		return new ResponseEntity<Inventory> (inventory, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "/inventory", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<List<Inventory>> getByCategory(@RequestParam("category") String category) throws InventoryNotFoundException  {
-		List<Inventory> inventory = inventoryService.findByCategory(category);
-		return new ResponseEntity<List<Inventory>> (inventory, HttpStatus.OK);
-	}
-
 }

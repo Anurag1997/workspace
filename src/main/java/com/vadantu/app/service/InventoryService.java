@@ -9,7 +9,6 @@ public interface InventoryService {
 
 	Inventory findBy(Long idInventory) throws InventoryNotFoundException;
 	Inventory findBy(String description) throws InventoryNotFoundException;
-	List<Inventory> findByCategory(String category) throws InventoryNotFoundException;
 	List<Inventory> findAll() throws InventoryNotFoundException;
 	
 }
